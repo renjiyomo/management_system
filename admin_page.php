@@ -37,6 +37,8 @@ if (!$result_admin || mysqli_num_rows($result_admin) != 1) {
     exit();
 }
 
+
+
 $filterCourse = isset($_GET['filterCourse']) ? trim($_GET['filterCourse']) : '';
 $searchTerm = isset($_GET['search']) ? trim($_GET['search']) : '';
 $sql = "SELECT students_id, student_name, course, year, block FROM students";
@@ -87,6 +89,21 @@ $conn->close();
         </div>
     </div>
 </div>
+
+<?php if (isset($_SESSION['success_message'])): ?>
+    <div class="success-message">
+        <?= htmlspecialchars($_SESSION['success_message']); ?>
+    </div>
+    <?php unset($_SESSION['success_message']); // Remove message after displaying ?>
+<?php endif; ?>
+
+
+<?php if (isset($_SESSION['error_message'])): ?>
+    <div class="alert alert-danger">
+        <?= htmlspecialchars($_SESSION['error_message']) ?>
+    </div>
+    <?php unset($_SESSION['error_message']); ?>
+<?php endif; ?>
 
 <div class="dashboard">
     <div class="dashboard-item">
@@ -296,7 +313,6 @@ $conn->close();
     <script src="js/search.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/viewModal.js"></script>
-
 
 
 </body>

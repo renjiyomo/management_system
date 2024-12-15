@@ -1,7 +1,8 @@
 <?php
+session_start();
 include 'server/connection.php';
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $student_name = $_POST['student_name'];
     $contact_number = $_POST['contact_number'];
     $gender = $_POST['gender'];
@@ -12,15 +13,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $block = $_POST['block'];
     $status = $_POST['status'];
 
-    $query = "INSERT INTO students (student_name, contact_number, gender, address, birth_date, course, year, block, status)
+    $query = "INSERT INTO students (student_name, contact_number, gender, address, birth_date, course, year, block, status) 
               VALUES ('$student_name', '$contact_number', '$gender', '$address', '$birth_date', '$course', '$year', '$block', '$status')";
-
-    if ($conn->query($query) === TRUE) {
-        header("Location: user_page.php?success=1");
+    
+    if (mysqli_query($conn, $query)) {
+        $_SESSION['success_message'] = "Student successfully added!";
+        header("Location: user_page.php");
+        exit();
     } else {
-        echo "Error: " . $conn->error;
+        $_SESSION['error_message'] = "Error: " . mysqli_error($conn);
+        header("Location: user_page.php");
+        exit();
     }
-
-    $conn->close();
 }
 ?>

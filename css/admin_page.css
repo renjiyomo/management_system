@@ -540,3 +540,48 @@ footer {
     position: relative;
     margin-top: 30px;
 }
+
+.alert {
+    padding: 10px;
+    margin: 15px 0;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+.success-message {
+    display: flex;
+    justify-content: center;
+    background-color: #003366;
+    color: #ffa31a;
+    border: 1px solid #FF5003;
+    padding: 10px 20px;
+    margin: 0 auto;
+    animation: fadeOut 2s forwards; /* Apply the fade-out animation */
+    
+}
+
+.alert-danger {
+    display: flex;
+    justify-content: center;
+    background-color: #FF5003;
+    color: #003F7D;
+    border: 1px solid #002347;
+    padding: 10px 20px;
+    margin: 0 auto;
+    animation: fadeOut 2s forwards; /* Apply the fade-out animation */
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1; /* Start fully visible */
+    }
+    90% {
+        opacity: 0.5; /* Remain visible until near the end */
+    }
+    100% {
+        opacity: 0; /* Fully invisible */
+        display: none; /* Optional: Remove from view */
+    }
+}
